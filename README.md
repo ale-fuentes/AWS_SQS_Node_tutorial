@@ -118,3 +118,10 @@ git commit -m ".gitignore is now working"
 ```
 
 If the step 2 doesn’t work then you should write the whole route of the files that you would like to add.
+
+### push my git local to remote
+
+```
+git remote add origin https://github.com/ale-fuentes/AWS_SQS_Node_tutorial.git
+git push -u origin master
+```
