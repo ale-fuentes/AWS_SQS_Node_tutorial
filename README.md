@@ -1,4 +1,45 @@
 
+### pacakge installed in project
+
+```
+$ npm init
+$ npm install express body-parser --save
+$ npm install npm-run-all --save
+$ npm install aws-sdk dotenv --save
+$ npm install nodemon -D
+```
+
+with `npm-run-all`installed, we add some configuration inner configure `package.json`:
+
+```
+{
+  // some code ...
+
+  "scripts": {
+    "start-orders-svc": "node ./orderssvc/index.js 8081",
+    "start-emails-svc": "node ./emailssvc/index.js",
+    "start": "npm-run-all -p -r start-orders-svc"
+  },
+
+  // some code ...
+}
+
+```
+
+### consumer
+
+```
+$ npm i sqs-consumer --save
+$ npm i nodemailer
+```
+
+### nodemailer
+
+Important
+In my case, Gmail blocked my email for security issues. To make this work, I activated the less secured app Gmail’s option:
+1.  Go to your Gmail account https://myaccount.google.com/
+2. In the search input type less secure apps.
+3. Select the first result and enable access to these apps.
 
 
 ### .gitignore
