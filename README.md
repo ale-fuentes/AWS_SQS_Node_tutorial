@@ -1,127 +1,93 @@
 
-### pacakge installed in project
+## Amazon SQS with Node
+
+![](https://img.shields.io/badge/OS-Windows-informational?style=flat&logo=windows&logoColor=white&color=0078D6)
+![](https://img.shields.io/badge/IDE-Visual_Studio_Code-informational?style=flat&logo=visual-studio-code&logoColor=white&color=007ACC)
+
+
+![](https://img.shields.io/badge/Cloud-Amazon_AWS-informational?style=flat&logo=AmazonAWS&logoColor=white&color=232F3E)
+![](https://img.shields.io/badge/Language-Node.Js-informational?style=flat&logo=Node.js&logoColor=white&color=339933)
+
+![](https://img.shields.io/badge/Author-Alejandro_Fuentes_|_fuentesra@hotmail.com-informational?style=flat&logoColor=white&color=4a4c4d)
+
+## Starting
+
+some tips for use this code
+
+1. **Create an acount in AWS**, you can create one [free acount AWS](https://aws.amazon.com/free/).
+2. **Create a credential** for we can call services AWS, [see here how to](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html).
+3. **Create a SQS** in our AWS, one SQS of type *fifo*, [here has a tutorial](https://console.aws.amazon.com/sqs/).
+4. **Install Node.js** from [our site](https://nodejs.org/en/).
+5. **Install git** for clone this project, here you can [download and install](https://git-scm.com/downloads).
+6. **Clone project**, in some folder, for it using next command:
 
 ```
-$ npm init
-$ npm install express body-parser --save
-$ npm install npm-run-all --save
-$ npm install aws-sdk dotenv --save
-$ npm install nodemon -D
+git clone https://github.com/ale-fuentes/AWS_SQS_Node_tutorial.git
 ```
 
-with `npm-run-all`installed, we add some configuration inner configure `package.json`:
+7. **create in root project `.env` file**, this is importand for configuration our project, to continue write next codign with your configurations:
 
 ```
+# AWS
+AWS_ACCESS_KEY_ID=<YOUR ACCESS KEY>
+AWS_SECRET_ACCESS_KEY=<YOUR ACCESS SECRET>
+AWS_REGION=<YOUR REGION>
+AWS_QUEUE_URL=<YOUT URL QUEUE>
+AWS_MESSAGE_GROUP=<YOUR GROUP>
+AWS_API_VERSION=<YOUR VERSION>
+
+# EMAIL
+EMAIL_SERVICE=gmail
+EMAIL_AUTH_USER=<YOUR TEST EMAIL GMAIL>
+EMAIL_AUTH_PASS=<YOUR PASSWORD EMAIL>
+SENDER_EMAIL_ADDRESS=<YOUR EMAIL TO SENDER>
+```
+8. **preparing project for your execution** after all before steps are completed, with next command:
+
+```
+$ npm i 
+```
+
+9. **execute project**, with next command:
+
+```
+$ npm start
+```
+
+10. **Testing using Postman**, we may need to install it, them here you can [download and install](https://www.postman.com/downloads/). Fort testing you need use url al port indicate in pacakge.json:
+
+```
+type requisition: GET
+url to reuqisiton: http://localhost:8081/index
+```
+
+> **NOTE** <br/>
+> if por 80 are busy, using next command for listing all service in port 8081:
+> 
+> ```
+> netstat -ano | findstr LISTENING | findstr 8081
+> ```
+> 
+> if are listing, get `PID` and finish it with next command:
+> 
+> ```
+> taskkill -PID <number> -F
+> ```
+>
+> _
+
+
+and, how paramts in the body:
+
+```
+Type paramt: Body
+Format paramt: JSON
+Paramt example:
+
 {
-  // some code ...
-
-  "scripts": {
-    "start-orders-svc": "node ./orderssvc/index.js 8081",
-    "start-emails-svc": "node ./emailssvc/index.js",
-    "start": "npm-run-all -p -r start-orders-svc"
-  },
-
-  // some code ...
+    "userEmail": "rrrfafafa@gmail.com",
+    "itemName": "eraser",
+    "itemPrice": "1.55",
+    "itemsQuantity": "2"
 }
-
-```
-
-### consumer
-
-```
-$ npm i sqs-consumer --save
-$ npm i nodemailer
-```
-
-### nodemailer
-
-Important
-In my case, Gmail blocked my email for security issues. To make this work, I activated the less secured app Gmail’s option:
-1.  Go to your Gmail account https://myaccount.google.com/
-2. In the search input type less secure apps.
-3. Select the first result and enable access to these apps.
-
-
-### .gitignore
-
-1) Create a .gitignore file. To do that, you just create a .txt file and change the extension as follows:
-
-Enter image description here
-
-Then you have to change the name, writing the following line in a cmd window:
-
- rename git.txt .gitignore
-Where git.txt is the name of the file you've just created.
-
-Then you can open the file and write all the files you don’t want to add on the repository. For example, mine looks like this:
-
-```
-#OS junk files
-[Tt]humbs.db
-*.DS_Store
-
-#Visual Studio files
-*.[Oo]bj
-*.user
-*.aps
-*.pch
-*.vspscc
-*.vssscc
-*_i.c
-*_p.c
-*.ncb
-*.suo
-*.tlb
-*.tlh
-*.bak
-*.[Cc]ache
-*.ilk
-*.log
-*.lib
-*.sbr
-*.sdf
-*.pyc
-*.xml
-ipch/
-obj/
-[Bb]in
-[Dd]ebug*/
-[Rr]elease*/
-Ankh.NoLoad
-
-#Tooling
-_ReSharper*/
-*.resharper
-[Tt]est[Rr]esult*
-
-#Project files
-[Bb]uild/
-
-#Subversion files
-.svn
-
-# Office Temp Files
-~$*
-```
-
-Once you have this, you need to add it to your Git repository. You have to save the file where your repository is.
-
-Then in Git Bash you have to write the following line:
-
-git config --global core.excludesfile ~/.gitignore_global
-If the repository already exists then you have to do the following:
-
-```
-git rm -r --cached .
-git add .
-git commit -m ".gitignore is now working"
-```
-
-If the step 2 doesn’t work then you should write the whole route of the files that you would like to add.
-
-### push my git local to remote
-
-```
-git remote add origin https://github.com/ale-fuentes/AWS_SQS_Node_tutorial.git
-git push -u origin master
 ```
